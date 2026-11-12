@@ -1,3 +1,7 @@
+console.time("Run time");
+
+import strs from "./array.ts";
+
 function groupAnagrams(strs: string[]): string[][] {
   let words = new Map<string, string[]>();
 
@@ -14,7 +18,9 @@ function groupAnagrams(strs: string[]): string[][] {
   return Array.from(words.values());
 }
 
-console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+console.log(groupAnagrams(strs));
+
+console.timeEnd("Run time");
 
 /*
 given an array of strings called strs, group the anagrams together.

@@ -1,41 +1,39 @@
+console.time("Run time");
+
+import strs from "./array.ts";
+
 function groupAnagrams(strs: string[]): string[][] {
-    let word = new Set<string>();
-    let result: string[][] = [];
+  let word = new Set<string>();
+  let result: string[][] = [];
 
-    for (const words of strs) {
-        const sortedStr = words.split('').sort().join('');
-        word.add(sortedStr)
+  for (const words of strs) {
+    const sortedStr = words.split("").sort().join("");
+    word.add(sortedStr);
+  }
+
+  const wordsArr = [...word];
+
+  for (let i: number = 0; i < wordsArr.length; i++) {
+    let letterSet: string = wordsArr[i];
+
+    let toPush: string[] = [];
+
+    for (const word of strs) {
+      const sortedStr = word.split("").sort().join("");
+      if (sortedStr === letterSet) {
+        toPush.push(word);
+      }
     }
 
-    console.log(`This is the set word ${word}`);
+    result.push(toPush);
+  }
 
-    const wordsArr = [...word];
-
-    console.log(`This is the array wordsArr ${wordsArr}`)
-
-    for (let i: number = 0; i < wordsArr.length; i++) {
-        let letterSet: string = wordsArr[i]
-
-        console.log(`This is the letterSet ${letterSet} on the iteration number ${i}`)
-
-        let toPush: string[] = []
-        
-        for (const word of strs) {
-            const sortedStr = word.split('').sort().join('');
-            if (sortedStr === letterSet) {
-                toPush.push(word)
-            }
-        }
-
-        result.push(toPush);
-    }
-
-    return result
-};
-
-let strs: string[] = ["eat","tea","tan","ate","nat","bat"];
+  return result;
+}
 
 console.log(groupAnagrams(strs));
+
+console.timeEnd("Run time");
 
 /*
 given an array of strings called strs, group the anagrams together.
